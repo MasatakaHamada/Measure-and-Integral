@@ -1,0 +1,220 @@
+\documentclass{jsreport}
+\usepackage{amsmath, amssymb} % 数学記号のパッケージ
+
+% 定理などの番号付けに関するパッケージとその設定
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{defi}{定義}[section]
+\newtheorem{lem}[defi]{補題}
+\newtheorem{prop}[defi]{命題}
+\newtheorem{thm}[defi]{定理}
+\newtheorem{cor}[defi]{系}
+\newtheorem{rem}[defi]{注意}
+\newtheorem{exq}[defi]{例題}
+\newtheorem{qst}[defi]{問}
+
+\title{抽象論から始めるルベーグ積分入門}
+\author{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\part{一般の測度空間における積分}
+
+\chapter{測度空間}
+
+\section{有限加法族}
+
+\begin{defi}\label{def_algebra}
+集合$S$に対し，$S$の部分集合族$\Sigma_0$が$S$上の\textbf{有限加法族}であるとは，
+次の条件をすべて満たすことである:
+\begin{enumerate}
+\item$S\in\Sigma_0$
+\item$A\in\Sigma_0 \Rightarrow A^c\in\Sigma_0$
+\item$A_1,A_2\in\Sigma_0 \Rightarrow A_1 \cup A_2\in\Sigma_0$
+\end{enumerate}
+\end{defi}
+
+\begin{qst}\label{qst_algebra}
+定義\ref{def_algebra}の条件
+$A_1,A_2\in\Sigma_0 \Rightarrow A_1 \cup A_2\in\Sigma_0$
+は次の条件と同値であることを示せ:
+任意の$n=1,2,\cdots$に対して，
+$A_1,A_2,\cdots,A_n\in\Sigma_0 \Rightarrow A_1 \cup A_2 \cup\cdots\cup A_n\in\Sigma_0$
+\end{qst}
+
+\section{$\sigma$-加法族}
+
+\begin{defi}\label{def_sigma_algebra}
+集合$S$に対し，$S$の部分集合族$\Sigma$が$S$上の\textbf{$\sigma$-加法族}であるとは，
+次の条件をすべて満たすことである:
+\begin{enumerate}
+\item$S\in\Sigma$
+\item$A\in\Sigma \Rightarrow A^c\in\Sigma$
+\item$A_1,A_2,\cdots\in\Sigma \Rightarrow \displaystyle \bigcup_{n=1}^\infty A_n\in\Sigma$
+\end{enumerate}
+\end{defi}
+
+\begin{qst}\label{qst_sigma_algebra_is_algebra}
+集合$S$上の$\sigma$-加法族は$S$上の有限加法族であることを示せ．
+\end{qst}
+
+\begin{qst}\label{qst_countable_intersection}
+集合$S$上の$\sigma$-加法族$\Sigma$に対して，次が成り立つことを示せ:
+$A_1,A_2,\cdots\in\Sigma \Rightarrow \displaystyle \bigcap_{n=1}^\infty A_n\in\Sigma$
+\end{qst}
+
+\begin{prop}\label{prop_minimal_sigma_algebra}
+集合$S$の任意の部分集合族$\mathcal{A}$に対し，$\mathcal{A}$を含む最小の$\sigma$-加法族が存在する．
+すなわち，次の条件をすべて満たす$\sigma$-加法族$\Sigma$が存在する:
+\begin{enumerate}
+\item$\mathcal{A}\subseteq\Sigma$
+\item$\mathcal{A}\subseteq\Sigma'$を満たす任意の$\sigma$-加法族$\Sigma'$に対して$\Sigma\subseteq\Sigma'$
+\end{enumerate}
+\end{prop}
+
+\begin{defi}\label{def_minimal_sigma_algebra}
+集合$S$の任意の部分集合族$\mathcal{A}$に対し，
+$\mathcal{A}$を含む最小の$\sigma$-加法族を$\sigma(\mathcal{A})$と書く．
+\end{defi}
+
+\begin{defi}\label{def_Borel_set}
+位相空間$S$に対し，$S$の開集合をすべて含む最小の$\sigma$-加法族を$\mathcal{B}(S)$と書く．
+\end{defi}
+
+\section{可測空間}
+
+\begin{defi}\label{def_measurable_space}
+集合$S$と$S$上の$\sigma$-加法族$\Sigma$の組$(S,\Sigma)$を\textbf{可測空間}と呼ぶ．
+\end{defi}
+
+\section{有限加法性(仮)}
+
+\begin{defi}\label{def_disjoint_union}
+集合$A_1,A_2,\cdots$が，$i \neq j$に対して$A_i \cap A_j=\varnothing$を満たすとき，
+\[ \sum_{n=1}^k A_n:=\bigcup_{n=1}^k A_n，\sum_{n=1}^\infty A_n:=\bigcup_{n=1}^\infty A_n \]
+と定める．
+\end{defi}
+
+\section{測度}
+
+\begin{defi}\label{def_measure}
+可測空間$(S,\Sigma)$上の関数$\mu \colon \Sigma\to[0,\infty]$が\textbf{測度}であるとは，
+次の条件をすべて満たすことである:
+\begin{enumerate}
+\item$\mu(\varnothing)=0$
+\item$\displaystyle\mu\left(\sum_{n=1}^\infty A_n\right)=\sum_{n=1}^\infty\mu(A_n)$
+\end{enumerate}
+\end{defi}
+
+\section{測度空間}
+
+\begin{defi}\label{def_measure_space}
+可測空間$(S,\Sigma)$および$(S,\Sigma)$上の測度$\mu \colon \Sigma\to[0,\infty]$に対して，
+組$(S,\Sigma,\mu)$を\textbf{測度空間}と呼ぶ．
+\end{defi}
+
+\chapter{可測関数}
+
+$(S,\Sigma)$を可測空間とする．
+
+\section{可測関数}
+
+\begin{defi}\label{def_measurable_function}
+$S$上の関数$h \colon S\to\mathbb{R}$が\textbf{$\Sigma$-可測関数}であるとは，
+任意の$A\in\Sigma$に対して$h^{-1}(A)\in\mathcal{B}(\mathbb{R})$が成り立つことをいう．
+\end{defi}
+
+\begin{defi}\label{def_indicator_function}
+$A\in\Sigma$に対し，$S$上の関数$1_A \colon S\to\mathbb{R}$を
+\[ 1_A(s):=\begin{cases}1 & (s \in A) \\ 0 & (s \notin A)\end{cases} \]
+により定める．このような関数を\textbf{定義関数}と呼ぶ．
+\end{defi}
+
+\begin{qst}\label{qst_indicator_function_is_measurable}
+$A\in\Sigma$に対し，定義関数$1_A \colon S\to\mathbb{R}$は$\Sigma$-可測関数であることを示せ．
+\end{qst}
+
+\begin{defi}\label{def_positive_and_negative_part}
+関数$f \colon S\to\mathbb{R}$に対して
+$f^+(s):=\max\{f(s),0\}, f^-(s):=\max\{-f(s),0\}$
+と定める．
+\end{defi}
+
+\begin{prop}\label{prop_positive_and_negative_part_are_measurable}
+$\Sigma$-可測関数$f \colon S\to\mathbb{R}$に対して，$f^+,f^-$は$\Sigma$-可測関数である．
+\end{prop}
+
+\begin{prop}\label{prop_measurable_function_and_arithmetic}
+$\Sigma$-可測関数$h_1,h_2 \colon S\to\mathbb{R}$および$a\in\mathbb{R}$に対し，
+$h_1+h_2, ah_1, h_1h_2$は$\Sigma$-可測関数である．
+\end{prop}
+
+\begin{defi}\label{def_simple_function}
+$a_1,a_2,\cdots,a_n\in\mathbb{R}$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し，
+\[ \sum_{i=1}^n a_i1_{A_i}(s) \]
+の形で表せる$S$上の関数を\textbf{単関数}と呼ぶ．
+\end{defi}
+
+\chapter{積分}
+
+$(S,\Sigma,\mu)$を測度空間とする．
+
+\section{定義関数の積分}
+
+\begin{defi}\label{def_indicator_function_integral}
+$A\in\Sigma$に対し，定義関数$1_A \colon S\to\mathbb{R}$の積分を
+\[ \int_S 1_A(s)\mu(ds):=\mu(A) \]
+で定める．
+\end{defi}
+
+\section{単関数の積分}
+
+\begin{defi}\label{def_simple_function_integral}
+$a_1,a_2,\cdots,a_n\in\mathbb{R}$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し，
+単関数$f(s)=\displaystyle\sum_{i=1}^n a_i1_{A_i}(s)$の積分を
+\[ \int_S f(s)\mu(ds):=\sum_{i=1}^n a_i\mu(A_i) \]
+で定める．
+\end{defi}
+
+\begin{qst}\label{qst_simple_function_integral}
+単関数の積分の定義\ref{def_simple_function_integral}はwell-definedであることを示せ．
+すなわち，単関数$f \colon S\to\mathbb{R}$が
+\[ f(s)=\sum_{i=1}^n a_i1_{A_i}(s)=\sum_{i=1}^m b_i1_{B_i}(s) \]
+の2通りで表されるとき，
+\[ \sum_{i=1}^n a_i\mu(A_i)=\sum_{i=1}^m b_i\mu(B_i) \]
+となることを示せ．
+\end{qst}
+
+\section{非負可測関数の積分}
+
+\begin{thm}[\textbf{単調収束定理}]\label{monotone_convergence_theorem}
+非負$\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$と$\Sigma$-可測関数$f$が，
+すべての$s \in S$に対して$0 \leq f_1(s) \leq f_2(s) \leq\cdots$かつ
+$\displaystyle\lim_{n\to\infty}f_n(s)=f(s)$を満たすとき，次が成り立つ:
+\[ \lim_{n\to\infty}\int_S f_n(s)\mu(ds)=\int_S f(s)\mu(ds) \]
+\end{thm}
+
+\section{可測関数の積分}
+
+\begin{defi}\label{def_measurable_function_integral}
+$\Sigma$-可測関数$f \colon S\to\mathbb{R}$の積分を
+\[ \int_S f(s)\mu(ds):=\int_S f^+(s)\mu(ds)-\int_S f^-(s)\mu(ds)  \]
+で定める．
+\end{defi}
+
+\section{優収束定理}
+
+\begin{thm}[\textbf{ファトゥの補題}]\label{Fatou_lemma}
+非負$\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$に対して次が成り立つ:
+\[ \liminf_{n\to\infty}\int_S f_n(s)\mu(ds)\leq\int_S\liminf_{n\to\infty}f_n(s)\mu(ds) \]
+\end{thm}
+
+% \part{$\mathbb{R}$上のルベーグ積分}
+% \chapter{1次元ルベーグ測度}
+% \chapter{ルベーグ可測空間}
+% \chapter{可測関数}
+% \chapter{積分}
+
+\end{document}
