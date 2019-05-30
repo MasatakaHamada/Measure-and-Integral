@@ -169,18 +169,18 @@ $A\in\Sigma$に対し，定義関数$1_A \colon S\to\mathbb{R}$の積分を
 で定める．
 \end{defi}
 
-\section{単関数の積分}
+\section{非負単関数の積分}
 
-\begin{defi}\label{def_simple_function_integral}
-$a_1,a_2,\cdots,a_n\in\mathbb{R}$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し，
-単関数$f(s)=\displaystyle\sum_{i=1}^n a_i1_{A_i}(s)$の積分を
+\begin{defi}\label{def_nonnegative_simple_function_integral}
+$a_1,a_2,\cdots,a_n\in[0,\infty)$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し，
+非負単関数$f(s)=\displaystyle\sum_{i=1}^n a_i1_{A_i}(s)$の積分を
 \[ \int_S f(s)\mu(ds):=\sum_{i=1}^n a_i\mu(A_i) \]
 で定める．
 \end{defi}
 
 \begin{qst}\label{qst_simple_function_integral}
-単関数の積分の定義\ref{def_simple_function_integral}はwell-definedであることを示せ．
-すなわち，単関数$f \colon S\to\mathbb{R}$が
+定義\ref{def_nonnegative_simple_function_integral}はwell-definedであることを示せ．
+すなわち，非負単関数$f \colon S\to[0,\infty)$が
 \[ f(s)=\sum_{i=1}^n a_i1_{A_i}(s)=\sum_{i=1}^m b_i1_{B_i}(s) \]
 の2通りで表されるとき，
 \[ \sum_{i=1}^n a_i\mu(A_i)=\sum_{i=1}^m b_i\mu(B_i) \]
@@ -188,6 +188,16 @@ $a_1,a_2,\cdots,a_n\in\mathbb{R}$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し
 \end{qst}
 
 \section{非負可測関数の積分}
+
+\begin{defi}\label{def_nonnegative_function_integral}
+非負$\Sigma$-可測関数$f \colon S\to\mathbb[0,\infty)$の積分を
+\[ \int_S f(s)\mu(ds):=\sup\left\{\int_Sh(s)\mu(ds):hは非負単関数でh \leq fを満たす\right\} \]
+で定める．
+\end{defi}
+
+\begin{qst}\label{qst_nonnegative_function_integral_and_simple_function}
+非負単関数$f$に対して，定義\ref{def_nonnegative_function_integral}の等号が成り立つことを示せ．
+\end{qst}
 
 \begin{thm}[\textbf{単調収束定理}]\label{monotone_convergence_theorem}
 非負$\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$と$\Sigma$-可測関数$f$が，
@@ -206,10 +216,18 @@ $\Sigma$-可測関数$f \colon S\to\mathbb{R}$の積分を
 
 \section{優収束定理}
 
-\begin{thm}[\textbf{ファトゥの補題}]\label{Fatou_lemma}
+\begin{lem}[\textbf{ファトゥの補題}]\label{Fatou_lemma}
 非負$\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$に対して次が成り立つ:
-\[ \liminf_{n\to\infty}\int_S f_n(s)\mu(ds)\leq\int_S\liminf_{n\to\infty}f_n(s)\mu(ds) \]
-\end{thm}
+\[ \int_S\liminf_{n\to\infty}f_n(s)\mu(ds)\leq\liminf_{n\to\infty}\int_S f_n(s)\mu(ds) \]
+\end{lem}
+
+\begin{cor}\label{reverse_Fatou_lemma}
+非負$\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$に対して，
+ある非負$\Sigma$-可測関数$g$が存在して
+$f_n \leq g\ (n=1,2,\cdots)$かつ$\mu(g)<\infty$を満たすとき，
+次が成り立つ:
+\[ \int_S\limsup_{n\to\infty}f_n(s)\mu(ds)\geq\limsup_{n\to\infty}\int_S f_n(s)\mu(ds) \]
+\end{cor}
 
 % \part{$\mathbb{R}$上のルベーグ積分}
 % \chapter{1次元ルベーグ測度}
