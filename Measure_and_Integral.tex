@@ -89,7 +89,18 @@ $\mathcal{A}$を含む最小の$\sigma$-加法族を$\sigma(\mathcal{A})$と書�
 集合$S$と$S$上の$\sigma$-加法族$\Sigma$の組$(S,\Sigma)$を\textbf{可測空間}と呼ぶ．
 \end{defi}
 
-\section{有限加法性(仮)}
+\section{集合関数の有限加法性と$\sigma$-加法性}
+
+\begin{defi}\label{def_additive}
+集合$S$と$S$上の有限加法族$\Sigma_0$に対し，集合関数
+$\mu_0\colon\Sigma_0\to[0,\infty]$
+が\textbf{有限加法的}であるとは，次の条件をすべて満たすことである:
+\begin{enumerate}
+\item$\mu_0(\varnothing)=0$
+\item$A_1,A_2\in\Sigma_0$に対して
+$A_1 \cap A_2=\varnothing\Rightarrow\mu_0(A_1 \cup A_2)=\mu_0(A_1)+\mu_0(A_2)$
+\end{enumerate}
+\end{defi}
 
 \begin{defi}\label{def_disjoint_union}
 集合$A_1,A_2,\cdots$が，$i \neq j$に対して$A_i \cap A_j=\varnothing$を満たすとき，
@@ -97,15 +108,27 @@ $\mathcal{A}$を含む最小の$\sigma$-加法族を$\sigma(\mathcal{A})$と書�
 と定める．
 \end{defi}
 
+\begin{defi}\label{def_countably_additive}
+集合$S$と$S$上の有限加法族$\Sigma_0$に対し，集合関数
+$\mu_0\colon\Sigma_0\to[0,\infty]$
+が\textbf{$\sigma$-加法的}であるとは，次の条件をすべて満たすことである:
+\begin{enumerate}
+\item$\mu_0(\varnothing)=0$
+\item$\displaystyle\mu_0\left(\sum_{n=1}^\infty A_n\right)=\sum_{n=1}^\infty\mu_0(A_n)$
+\end{enumerate}
+\end{defi}
+
+\begin{qst}\label{qst_countably_additive_then_additive}
+集合$S$と$S$上の有限加法族$\Sigma_0$に対し，集合関数
+$\mu_0\colon\Sigma_0\to[0,\infty]$
+が$\sigma$-加法的であるとき，$\mu_0$は有限加法的であることを示せ．
+\end{qst}
+
 \section{測度}
 
 \begin{defi}\label{def_measure}
-可測空間$(S,\Sigma)$上の関数$\mu \colon \Sigma\to[0,\infty]$が\textbf{測度}であるとは，
-次の条件をすべて満たすことである:
-\begin{enumerate}
-\item$\mu(\varnothing)=0$
-\item$\displaystyle\mu\left(\sum_{n=1}^\infty A_n\right)=\sum_{n=1}^\infty\mu(A_n)$
-\end{enumerate}
+可測空間$(S,\Sigma)$上の集合関数$\mu \colon \Sigma\to[0,\infty]$が\textbf{測度}であるとは，
+$\mu$が$\sigma$-加法的であることをいう．
 \end{defi}
 
 \section{測度空間}
@@ -151,6 +174,10 @@ $\Sigma$-可測関数$h_1,h_2 \colon S\to\mathbb{R}$および$a\in\mathbb{R}$に
 $h_1+h_2, ah_1, h_1h_2$は$\Sigma$-可測関数である．
 \end{prop}
 
+\begin{qst}\label{qst_absolute_is_measurable}
+$\Sigma$-可測関数$f \colon S\to\mathbb{R}$に対して，$|f|$は非負$\Sigma$-可測関数であることを示せ．
+\end{qst}
+
 \begin{defi}\label{def_simple_function}
 $a_1,a_2,\cdots,a_n\in\mathbb{R}$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し，
 \[ \sum_{i=1}^n a_i1_{A_i}(s) \]
@@ -187,6 +214,22 @@ $a_1,a_2,\cdots,a_n\in[0,\infty)$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し
 となることを示せ．
 \end{qst}
 
+\begin{prop}\label{prop_properties_of_simple_function_integral}
+非負単関数$f,g \colon S\to[0,\infty)$と$a\geq0$に対して，次の性質が成り立つ:
+\begin{enumerate}
+\item$\mu(f \neq g)=0\Rightarrow\displaystyle\int_S f(s)\mu(ds)=\int_S g(s)\mu(ds)$
+\item$f+g, af$は非負単関数であり，次が成り立つ:
+\[ \int_S \{f(s)+g(s)\}\mu(ds)=\int_S f(s)\mu(ds)+\int_S g(s)\mu(ds)，
+\int_S af(s)\mu(ds)=a\int_S f(s)\mu(ds) \]
+\item$f \leq g\Rightarrow\displaystyle\int_S f(s)\mu(ds)\leq\int_S g(s)\mu(ds)$
+\item$(f \vee g)(s):=\max\{f(s),g(s)\}, (f \wedge g)(s):=\min\{f(s),g(s)\}$は非負単関数である．
+\end{enumerate}
+\end{prop}
+
+\begin{qst}\label{qst_proof_of_properties_of_simple_function_integral}
+命題\ref{prop_properties_of_simple_function_integral}を証明せよ．
+\end{qst}
+
 \section{非負可測関数の積分}
 
 \begin{defi}\label{def_nonnegative_function_integral}
@@ -206,13 +249,36 @@ $\displaystyle\lim_{n\to\infty}f_n(s)=f(s)$を満たすとき，次が成り立�
 \[ \lim_{n\to\infty}\int_S f_n(s)\mu(ds)=\int_S f(s)\mu(ds) \]
 \end{thm}
 
+\begin{prop}\label{prop_linearity_of_nonnegative_function_integral}
+$a,b\in[0,\infty)$と非負$\Sigma$-可測関数$f,g$に対して次が成り立つ:
+\[ \int_S\{af(s)+bg(s)\}\mu(ds)=a\int_Sf(s)\mu(ds)+b\int_Sg(s)\mu(ds) \]
+\end{prop}
+
 \section{可測関数の積分}
 
+\begin{defi}\label{def_integrable_function}
+$\Sigma$-可測関数$f \colon S\to\mathbb{R}$が$\mu$について\textbf{可積分}であるとは，
+$\displaystyle\int_S|f(s)|\mu(ds)<\infty$であることをいう．
+
+\end{defi}
+
 \begin{defi}\label{def_measurable_function_integral}
-$\Sigma$-可測関数$f \colon S\to\mathbb{R}$の積分を
+可積分関数$f \colon S\to\mathbb{R}$の積分を
 \[ \int_S f(s)\mu(ds):=\int_S f^+(s)\mu(ds)-\int_S f^-(s)\mu(ds)  \]
 で定める．
 \end{defi}
+
+\begin{qst}\label{qst_absolute_integral_and_integral_absolute}
+可積分関数$f$に対して
+$\displaystyle\left|\int_Sf(s)\mu(ds)\right|\leq\int_S|f(s)|\mu(ds)$
+が成り立つことを示せ．
+\end{qst}
+
+\begin{prop}\label{prop_linearity_of_integrable_function_integral}
+$a,b\in\mathbb{R}$と可積分関数$f,g$に対して，
+$af+bg$は可積分関数であり，次が成り立つ:
+\[ \int_S\{af(s)+bg(s)\}\mu(ds)=a\int_Sf(s)\mu(ds)+b\int_Sg(s)\mu(ds) \]
+\end{prop}
 
 \section{優収束定理}
 
@@ -221,6 +287,10 @@ $\Sigma$-可測関数$f \colon S\to\mathbb{R}$の積分を
 \[ \int_S\liminf_{n\to\infty}f_n(s)\mu(ds)\leq\liminf_{n\to\infty}\int_S f_n(s)\mu(ds) \]
 \end{lem}
 
+\begin{qst}\label{qst_counterexample_of_Fatou_lemma}
+補題\ref{Fatou_lemma}の反例を挙げよ．
+\end{qst}
+
 \begin{cor}\label{reverse_Fatou_lemma}
 非負$\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$に対して，
 ある非負$\Sigma$-可測関数$g$が存在して
@@ -228,6 +298,16 @@ $f_n \leq g\ (n=1,2,\cdots)$かつ$\mu(g)<\infty$を満たすとき，
 次が成り立つ:
 \[ \int_S\limsup_{n\to\infty}f_n(s)\mu(ds)\geq\limsup_{n\to\infty}\int_S f_n(s)\mu(ds) \]
 \end{cor}
+
+\begin{thm}[\textbf{優収束定理}]\label{dominated_convergence_theorem}
+$\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$と$\Sigma$-可測関数$f$が，
+すべての$s \in S$に対して$\displaystyle\lim_{n\to\infty}f_n(s)=f(s)$を満たすとする．
+さらに，ある非負可積分関数$g$が存在して，$\displaystyle\int_Sg(s)\mu(ds)<\infty$かつ
+すべての$n=1,2,\cdots$および$s \in S$に対して$|f_n(s)| \leq g(s)$を満たすとする．このとき
+\[ \lim_{n\to\infty}\int_S|f_n(s)-f(s)|\mu(ds)=0 \]
+が成り立つ．従って，次が成り立つ:
+\[ \lim_{n\to\infty}\int_Sf_n(s)\mu(ds)=\int_Sf(s)\mu(ds) \]
+\end{thm}
 
 % \part{$\mathbb{R}$上のルベーグ積分}
 % \chapter{1次元ルベーグ測度}
