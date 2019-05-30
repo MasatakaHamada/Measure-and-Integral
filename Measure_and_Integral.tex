@@ -12,6 +12,15 @@
 \newtheorem{rem}[defi]{注意}
 \newtheorem{exq}[defi]{例題}
 \newtheorem{qst}[defi]{問}
+\renewcommand\proofname{\bf 証明} % proof環境の設定変更
+
+% ハイパーリンクに関するパッケージとその設定
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+\hypersetup{
+ colorlinks=true,
+ linkcolor=[rgb]{0,0,0}
+}
 
 \title{抽象論から始めるルベーグ積分入門}
 \author{}
@@ -314,5 +323,10 @@ $\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$と$\Sigma$-可測関数$f$が，
 % \chapter{ルベーグ可測空間}
 % \chapter{可測関数}
 % \chapter{積分}
+
+% 参考文献
+\begin{thebibliography}{9}
+\item David Williams, \textit{Probability with Martingales}, Cambridge University Press, 1991
+\end{thebibliography}
 
 \end{document}
