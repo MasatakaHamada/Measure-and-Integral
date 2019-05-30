@@ -291,7 +291,7 @@ $f^+(s):=\max\{f(s),0\}, f^-(s):=\max\{-f(s),0\}$
 \end{defi}
 
 \begin{qst}\label{qst_positive_and_negative_part_are_measurable}
-$\Sigma$-可測関数$f \colon S\to\mathbb{R}$に対して，$f^+,f^-$は$\Sigma$-可測関数であることを示せ．
+$\Sigma$-可測関数$f \colon S\to\mathbb{R}$に対して，$f^+,f^-$は非負$\Sigma$-可測関数であることを示せ．
 \end{qst}
 
 \begin{qst}\label{qst_absolute_is_measurable}
@@ -303,6 +303,17 @@ $a_1,a_2,\cdots,a_n\in\mathbb{R}$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し
 \[ \sum_{i=1}^n a_i1_{A_i}(s) \]
 の形で表せる$S$上の関数を\textbf{単関数}と呼ぶ．
 \end{defi}
+
+もちろん，単関数は可測関数である．
+
+\begin{prop}\label{prop_properties_of_nonnegative_simple_function}
+非負単関数$f,g \colon S\to[0,\infty)$と$a\geq0$に対して，$f+g, af$は非負単関数である．
+また，$(f \vee g)(s):=\max\{f(s),g(s)\}, (f \wedge g)(s):=\min\{f(s),g(s)\}$も非負単関数である．
+\end{prop}
+
+\begin{qst}\label{qst_proof_of_properties_of_nonnegative_simple_function}
+命題\ref{prop_properties_of_nonnegative_simple_function}を証明せよ．
+\end{qst}
 
 \chapter{積分}
 
@@ -338,11 +349,9 @@ $a_1,a_2,\cdots,a_n\in[0,\infty)$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し
 非負単関数$f,g \colon S\to[0,\infty)$と$a\geq0$に対して，次の性質が成り立つ:
 \begin{enumerate}
 \item$\mu(f \neq g)=0\Rightarrow\displaystyle\int_S f(s)\mu(ds)=\int_S g(s)\mu(ds)$
-\item$f+g, af$は非負単関数であり，次が成り立つ:
-\[ \int_S \{f(s)+g(s)\}\mu(ds)=\int_S f(s)\mu(ds)+\int_S g(s)\mu(ds)，
-\int_S af(s)\mu(ds)=a\int_S f(s)\mu(ds) \]
+\item$\displaystyle\int_S \{f(s)+g(s)\}\mu(ds)=\int_S f(s)\mu(ds)+\int_S g(s)\mu(ds)，
+\int_S af(s)\mu(ds)=a\int_S f(s)\mu(ds)$
 \item$f \leq g\Rightarrow\displaystyle\int_S f(s)\mu(ds)\leq\int_S g(s)\mu(ds)$
-\item$(f \vee g)(s):=\max\{f(s),g(s)\}, (f \wedge g)(s):=\min\{f(s),g(s)\}$は非負単関数である．
 \end{enumerate}
 \end{prop}
 
@@ -406,6 +415,11 @@ $af+bg$は可積分関数であり，次が成り立つ:
 非負$\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$に対して次が成り立つ:
 \[ \int_S\liminf_{n\to\infty}f_n(s)\mu(ds)\leq\liminf_{n\to\infty}\int_S f_n(s)\mu(ds) \]
 \end{lem}
+
+\begin{qst}\label{qst_proof_of_Fatou_lemma}
+$g_n(s):=\displaystyle\inf_{m \geq n}f_m(s)$とする．関数列$\{g_n\}_{n=1}^\infty$に
+定理\ref{monotone_convergence_theorem}を適用して，補題\ref{Fatou_lemma}を証明せよ．
+\end{qst}
 
 \begin{qst}\label{qst_counterexample_of_Fatou_lemma}
 補題\ref{Fatou_lemma}の反例を挙げよ．
