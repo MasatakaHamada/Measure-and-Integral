@@ -74,18 +74,31 @@ $A_1,A_2,\cdots,A_n\in\Sigma_0 \Rightarrow A_1 \cup A_2 \cup\cdots\cup A_n\in\Si
 $A_1,A_2,\cdots\in\Sigma \Rightarrow \displaystyle \bigcap_{n=1}^\infty A_n\in\Sigma$
 \end{qst}
 
-\begin{prop}\label{prop_minimal_sigma_algebra}
+\begin{prop}\label{prop_generated_sigma_algebra}
 集合$S$の任意の部分集合族$\mathcal{A}$に対し，$\mathcal{A}$を含む最小の$\sigma$-加法族が存在する．
-すなわち，次の条件をすべて満たす$\sigma$-加法族$\Sigma$が存在する:
+すなわち，次の条件をすべて満たす$S$上の$\sigma$-加法族$\Sigma$が存在する:
 \begin{enumerate}
 \item$\mathcal{A}\subseteq\Sigma$
 \item$\mathcal{A}\subseteq\Sigma'$を満たす任意の$\sigma$-加法族$\Sigma'$に対して$\Sigma\subseteq\Sigma'$
 \end{enumerate}
 \end{prop}
 
-\begin{defi}\label{def_minimal_sigma_algebra}
+\begin{proof}
+$\mathcal{A}\subseteq\Sigma'$を満たす$S$上の$\sigma$-加法族$\Sigma'$全体の集合を$\mathcal{E}$とする．
+このとき
+\[ \Sigma:=\bigcap_{\Sigma'\in\mathcal{E}}\Sigma' \]
+と定めれば，$\Sigma$は1,2をともに満たす$S$上の$\sigma$-加法族である．
+\end{proof}
+
+\begin{qst}\label{qst_proof_of_generated_sigma_algebra}
+命題\ref{prop_generated_sigma_algebra}において，
+$\Sigma$が1,2をともに満たし，かつ$S$上の$\sigma$-加法族であることを示せ．
+\end{qst}
+
+\begin{defi}\label{def_generated_sigma_algebra}
 集合$S$の任意の部分集合族$\mathcal{A}$に対し，
-$\mathcal{A}$を含む最小の$\sigma$-加法族を$\sigma(\mathcal{A})$と書く．
+$\mathcal{A}$を含む最小の$\sigma$-加法族を$\sigma(\mathcal{A})$と書き，
+$\mathcal{A}$によって生成される$\sigma$-加法族と呼ぶ．
 \end{defi}
 
 \begin{defi}\label{def_Borel_set}
@@ -151,11 +164,11 @@ $\mu$が$\sigma$-加法的であることをいう．
 
 $(S,\Sigma)$を可測空間とする．
 
-\section{可測関数}
+\section{可測関数の定義}
 
 \begin{defi}\label{def_measurable_function}
 $S$上の関数$h \colon S\to\mathbb{R}$が\textbf{$\Sigma$-可測関数}であるとは，
-任意の$A\in\Sigma$に対して$h^{-1}(A)\in\mathcal{B}(\mathbb{R})$が成り立つことをいう．
+任意の$B\in\mathcal{B}(\mathbb{R})$に対して$h^{-1}(B)\in\Sigma$が成り立つことをいう．
 \end{defi}
 
 \begin{defi}\label{def_indicator_function}
@@ -168,20 +181,118 @@ $A\in\Sigma$に対し，$S$上の関数$1_A \colon S\to\mathbb{R}$を
 $A\in\Sigma$に対し，定義関数$1_A \colon S\to\mathbb{R}$は$\Sigma$-可測関数であることを示せ．
 \end{qst}
 
+\section{可測関数であることを示すテクニック}
+
+問\ref{qst_indicator_function_is_measurable}のように簡単な関数であれば，
+定義に従って可測関数であることを示すことができる．
+しかし，定義に従って示すのは難しいことが多い．
+本節では，そのような場合に役立つ命題を紹介する．
+
+\begin{lem}\label{lem_measurability_and_generated_sigma_algebra}
+$\mathcal{A}\subseteq\mathcal{B}(\mathbb{R})$が
+$\sigma(\mathcal{A})=\mathcal{B}(\mathbb{R})$を満たすとする．
+このとき，$S$上の関数$h \colon S\to\mathbb{R}$が，
+任意の$A\in\mathcal{A}$に対して$h^{-1}(A)\in\Sigma$を満たすならば，
+$h$は$\Sigma$-可測関数である．
+\end{lem}
+
+\begin{proof}
+$\mathcal{E}:=\{B\in\mathcal{B}(\mathbb{R}):h^{-1}(B)\in\Sigma\}$とする．
+このとき，$\mathcal{E}$は$\sigma$-加法族であり，
+さらに仮定より$\mathcal{A}\subseteq\mathcal{E}$，
+$\sigma(\mathcal{A})=\mathcal{B}(\mathbb{R})$である．
+従って，$\mathcal{E}=\mathcal{B}(\mathbb{R})$が成り立つ．
+\end{proof}
+
+\begin{qst}\label{qst_proof_of_measurability_and_generated_sigma_algebra}
+補題\ref{lem_measurability_and_generated_sigma_algebra}の証明において，次の事実を確かめよ:
+\begin{enumerate}
+\item$\mathcal{E}$は$\sigma$-加法族である．
+\item$\mathcal{E}=\mathcal{B}(\mathbb{R})$が成り立つ．
+\end{enumerate}
+\end{qst}
+
+\begin{lem}\label{lem_what_Borel_real_set_is_generated_by}
+$\pi(\mathbb{R}):=\{(-\infty,a]:a\in\mathbb{R}\}$とする．
+このとき$\mathcal{B}(\mathbb{R})=\sigma(\pi(\mathbb{R}))$である．
+\end{lem}
+
+\begin{proof}
+任意の$a\in\mathbb{R}$に対して
+$(-\infty,a]=\displaystyle\bigcap_{n=1}^\infty(-\infty,a+n^{-1})\in\mathcal{B}(\mathbb{R})$
+である，すなわち$\pi(\mathbb{R})\subseteq\mathcal{B}(\mathbb{R})$が成り立ち，
+$\mathcal{B}(\mathbb{R})$は$\sigma$-加法族であるから
+$\sigma(\pi(\mathbb{R}))\subseteq\mathcal{B}(\mathbb{R})$となる．
+また，任意の$a,b\in\mathbb{R}$に対して
+\[ (a,b)=(a,\infty)\cap(-\infty,b)
+=(-\infty,a]^c\cap\bigcup_{n=1}^\infty(-\infty,b-n^{-1}]\in\sigma(\pi(\mathbb{R})) \]
+である．
+ここで，$\mathbb{R}$の任意の開集合が開区間の可算和で表せることに注意すると，
+$\mathbb{R}$の開集合はすべて$\sigma(\pi(\mathbb{R}))$の元となることがわかる．
+従って，$\sigma(\pi(\mathbb{R}))$は$\sigma$-加法族であるから
+$\mathcal{B}(\mathbb{R})\subseteq\sigma(\pi(\mathbb{R}))$となる．
+\end{proof}
+
+\begin{qst}\label{qst_real_open_set_is_countable_union_of_open_interval}
+$\mathbb{R}$の任意の開集合$O$は開区間の可算和で表せることを証明せよ．
+すなわち，ある実数列$\{a_n\}_{n=1}^\infty, \{b_n\}_{n=1}^\infty$が存在して，
+$O=\displaystyle\bigcup_{n=1}^\infty(a_n,b_n)$となることを示せ．
+\end{qst}
+
+補題\ref{lem_measurability_and_generated_sigma_algebra}
+および補題\ref{lem_what_Borel_real_set_is_generated_by}から，次の命題が従う．
+
+\begin{prop}\label{prop_technique_to_check_measurability}
+$S$上の関数$h \colon S\to\mathbb{R}$が，
+任意の$a\in\mathbb{R}$に対して$\{h \leq a\}\in\Sigma$を満たすならば，
+$h$は$\Sigma$-可測関数である．
+\end{prop}
+
+\begin{qst}\label{qst_technique_to_check_measurability}
+$S$上の関数$h \colon S\to\mathbb{R}$が次のいずれかの条件を満たすならば，
+$h$は$\Sigma$-可測関数であることを示せ．
+\begin{enumerate}
+\item 任意の$a\in\mathbb{R}$に対して$\{h > a\}\in\Sigma$
+\item 任意の$a\in\mathbb{R}$に対して$\{h < a\}\in\Sigma$
+\item 任意の$a\in\mathbb{R}$に対して$\{h \geq a\}\in\Sigma$
+\end{enumerate}
+\end{qst}
+
+\section{可測関数の性質}
+
+\begin{prop}\label{prop_measurable_function_and_arithmetic}
+$\Sigma$-可測関数$h_1,h_2 \colon S\to\mathbb{R}$および$a\in\mathbb{R}$に対し，
+$h_1+h_2, ah_1, h_1h_2$は$\Sigma$-可測関数である．
+\end{prop}
+
+\begin{proof}
+$b\in\mathbb{R}$および$s \in S$に対し，$h_1(s)+h_2(s)>b$であることは，
+ある$q\in\mathbb{Q}$が存在して$h_1(s)>q>b-h_2(s)$が成り立つことと同値である．
+従って，$h_1,h_2$は$\Sigma$-可測なので
+\[ \{h_1+h_2>b\}=\bigcup_{q\in\mathbb{Q}}\{h_1>q>b-h_2\}
+=\bigcup_{q\in\mathbb{Q}}(\{h_1>q\}\cap\{h_2>b-q\})\in\Sigma \]
+となり，$h_1+h_2$が$\Sigma$-可測であることが従う．
+$ah_1$について，$a=0$のときは定数関数ゆえ$\Sigma$-可測である．
+$a>0$のとき，$b\in\mathbb{R}$に対して$\{ah_1>b\}=\{h_1>a^{-1}b\}\in\Sigma$，
+$a<0$のとき，$b\in\mathbb{R}$に対して$\{ah_1>b\}=\{h_1<a^{-1}b\}\in\Sigma$
+となり，いずれの場合も$ah_1$は$\Sigma$-可測である．
+$h_1h_2$について，$h_1=h_2$のとき，
+$b<0$ならば$\{h_1h_2>b\}=\{h_1^2>b\}=S\in\Sigma$，
+$b\geq0$ならば$\{h_1h_2>b\}=\{h_1^2>b\}=\{h_1<-\sqrt{b}\}\cup\{h_1>\sqrt{b}\}\in\Sigma$
+となるから，$h_1h_2$は$\Sigma$-可測である．
+$h_1 \neq h_2$のときは，$h_1h_2=4^{-1}\{(h_1+h_2)^2-(h_1-h_2)^2\}$であることに注意すれば，
+これまでの議論から$h_1h_2$が$\Sigma$-可測となることがわかる．
+\end{proof}
+
 \begin{defi}\label{def_positive_and_negative_part}
 関数$f \colon S\to\mathbb{R}$に対して
 $f^+(s):=\max\{f(s),0\}, f^-(s):=\max\{-f(s),0\}$
 と定める．
 \end{defi}
 
-\begin{prop}\label{prop_positive_and_negative_part_are_measurable}
-$\Sigma$-可測関数$f \colon S\to\mathbb{R}$に対して，$f^+,f^-$は$\Sigma$-可測関数である．
-\end{prop}
-
-\begin{prop}\label{prop_measurable_function_and_arithmetic}
-$\Sigma$-可測関数$h_1,h_2 \colon S\to\mathbb{R}$および$a\in\mathbb{R}$に対し，
-$h_1+h_2, ah_1, h_1h_2$は$\Sigma$-可測関数である．
-\end{prop}
+\begin{qst}\label{qst_positive_and_negative_part_are_measurable}
+$\Sigma$-可測関数$f \colon S\to\mathbb{R}$に対して，$f^+,f^-$は$\Sigma$-可測関数であることを示せ．
+\end{qst}
 
 \begin{qst}\label{qst_absolute_is_measurable}
 $\Sigma$-可測関数$f \colon S\to\mathbb{R}$に対して，$|f|$は非負$\Sigma$-可測関数であることを示せ．
@@ -312,9 +423,8 @@ $f_n \leq g\ (n=1,2,\cdots)$かつ$\mu(g)<\infty$を満たすとき，
 $\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$と$\Sigma$-可測関数$f$が，
 すべての$s \in S$に対して$\displaystyle\lim_{n\to\infty}f_n(s)=f(s)$を満たすとする．
 さらに，ある非負可積分関数$g$が存在して，$\displaystyle\int_Sg(s)\mu(ds)<\infty$かつ
-すべての$n=1,2,\cdots$および$s \in S$に対して$|f_n(s)| \leq g(s)$を満たすとする．このとき
-\[ \lim_{n\to\infty}\int_S|f_n(s)-f(s)|\mu(ds)=0 \]
-が成り立つ．従って，次が成り立つ:
+すべての$n=1,2,\cdots$および$s \in S$に対して$|f_n(s)| \leq g(s)$を満たすとする．
+このとき，次が成り立つ:
 \[ \lim_{n\to\infty}\int_Sf_n(s)\mu(ds)=\int_Sf(s)\mu(ds) \]
 \end{thm}
 
