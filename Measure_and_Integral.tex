@@ -304,6 +304,7 @@ $a_1,a_2,\cdots,a_n\in\mathbb{R}$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し
 の形で表せる$S$上の関数を\textbf{単関数}と呼ぶ．
 \end{defi}
 
+単関数の定義を言い換えると「高々有限個の値しかとらない関数」ということである．
 もちろん，単関数は可測関数である．
 
 \begin{prop}\label{prop_properties_of_nonnegative_simple_function}
@@ -377,6 +378,48 @@ $a_1,a_2,\cdots,a_n\in[0,\infty)$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し
 $\displaystyle\lim_{n\to\infty}f_n(s)=f(s)$を満たすとき，次が成り立つ:
 \[ \lim_{n\to\infty}\int_S f_n(s)\mu(ds)=\int_S f(s)\mu(ds) \]
 \end{thm}
+
+定理\ref{monotone_convergence_theorem}の証明は容易ではない．
+むしろ，定理\ref{monotone_convergence_theorem}を様々な証明に生かせることの方が大切である．
+ここからは，定理\ref{monotone_convergence_theorem}を用いて示される積分の性質をいくつか見てみよう．
+
+\begin{defi}\label{def_staircase_function}
+各$r=1,2,\cdots$に対し，関数$\alpha^{(r)}\colon[0,\infty)\to[0,\infty)$を次のように定める:
+\[ \alpha^{(r)}(x):=\begin{cases}
+0 & (x=0) \\
+(i-1)2^{-r} & ((i-1)2^{-r}<x \leq i2^{-r} \leq r, i=1,2,\cdots) \\
+r & (r<x)
+\end{cases} \]
+関数$\alpha^{(r)}$を\textbf{第$r$階段関数}と呼ぶ．
+\end{defi}
+
+\begin{qst}\label{qst_staircase_function}
+適当な$r=1,2,\cdots$を決めて，第$r$階段関数のグラフをかけ．
+\end{qst}
+
+\begin{prop}\label{prop_approximation_of_nonnegative_function_integral}
+非負$\Sigma$-可測関数$f$に対して，
+次を満たす非負単関数の非減少列$\{f^{(r)}\}_{r=1}^\infty$が存在する:
+\[ \lim_{r\to\infty}\int_Sf^{(r)}(s)\mu(ds)=\int_Sf(s)\mu(ds) \]
+\end{prop}
+
+\begin{proof}
+非負$\Sigma$-可測関数$f$と$r=1,2,\cdots$に対して$f^{(r)}:=\alpha^{(r)} \circ f$とすると，
+各$f^{(r)}$は非負単関数であり，
+すべての$s \in S$に対して$0 \leq f^{(1)}(s) \leq f^{(2)}(s) \leq\cdots$かつ
+$\displaystyle\lim_{r\to\infty}f^{(r)}(s)=f(s)$が成り立つ．
+従って，定理\ref{monotone_convergence_theorem}より結論が得られる．
+\end{proof}
+
+命題\ref{prop_approximation_of_nonnegative_function_integral}は，
+非負可測関数の積分が非負単関数の積分によって近似できることを意味している．
+定義\ref{def_nonnegative_function_integral}において抽象的に定義された非負可測関数の積分が，
+具体的に計算できる非負単関数の積分の極限であるというのは，非常に嬉しいことである．
+
+\begin{prop}\label{prop_equal_ae_then_integral_equal}
+非負$\Sigma$-可測関数$f,g$がほとんど至るところ等しいとき，
+$\displaystyle\int_Sf(s)\mu(ds)=\int_Sg(s)\mu(ds)$である．
+\end{prop}
 
 \begin{prop}\label{prop_linearity_of_nonnegative_function_integral}
 $a,b\in[0,\infty)$と非負$\Sigma$-可測関数$f,g$に対して次が成り立つ:
