@@ -298,6 +298,24 @@ $\Sigma$-可測関数$f \colon S\to\mathbb{R}$に対して，$f^+,f^-$は非負$
 $\Sigma$-可測関数$f \colon S\to\mathbb{R}$に対して，$|f|$は非負$\Sigma$-可測関数であることを示せ．
 \end{qst}
 
+\begin{prop}\label{prop_inf_and_sup_are_measurable}
+$\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$に対して，
+$\displaystyle\inf_{n\geq1}f_n, \sup_{n\geq1}f_n, \liminf_{n\to\infty}f_n, \limsup_{n\to\infty}f_n$
+は$\Sigma$-可測関数である．
+\end{prop}
+
+\begin{proof}
+任意の$a\in\mathbb{R}$に対して
+$\displaystyle\left\{\inf_{n\geq1}f_n \leq a\right\}
+=\bigcup_{n=1}^\infty\{f_n \leq a\}\in\Sigma$であるから，
+命題\ref{prop_technique_to_check_measurability}より
+$\displaystyle\inf_{n\geq1}f_n$は$\Sigma$-可測関数である．
+\end{proof}
+
+\begin{qst}\label{qst_inf_and_sup_are_measurable}
+命題\ref{prop_inf_and_sup_are_measurable}の証明を完成させよ．
+\end{qst}
+
 \begin{defi}\label{def_simple_function}
 $a_1,a_2,\cdots,a_n\in\mathbb{R}$および$A_1,A_2,\cdots,A_n\in\Sigma$に対し，
 \[ \sum_{i=1}^n a_i1_{A_i}(s) \]
@@ -485,11 +503,67 @@ $\Sigma$-可測関数列$\{f_n\}_{n=1}^\infty$と$\Sigma$-可測関数$f$が，
 \[ \lim_{n\to\infty}\int_Sf_n(s)\mu(ds)=\int_Sf(s)\mu(ds) \]
 \end{thm}
 
-% \part{$\mathbb{R}$上のルベーグ積分}
-% \chapter{1次元ルベーグ測度}
+\part{1次元ルベーグ測度に基づく積分}
+
+\chapter{1次元ルベーグ測度}
+
+\section{$(0,1]$上のルベーグ測度の構成}
+
+本節では可測空間$((0,1],\mathcal{B}(0,1])$上のルベーグ測度を構成する．
+なお，記号$\mathcal{B}(0,1]$は$\mathcal{B}((0,1])$を意味している．
+これは括弧を書く回数をできるだけ減らすための記法である．
+
+$(0,1]$の部分集合族$\Sigma_0$を次のように定める:
+\[ \Sigma_0:=\{(a_1,b_1]\cup\cdots\cup(a_r,b_r] \subseteq S:
+0 \leq a_1 \leq b_1 \leq \cdots \leq a_r \leq b_r \leq 1, r\in\mathbb{N}\} \]
+
+\begin{qst}\label{qst_check_that_Sigma_0_is_algebra}
+$\Sigma_0$が$(0,1]$上の有限加法族であることを示せ．
+\end{qst}
+
+\begin{qst}\label{qst_check_that_Borel_01_is_generated}
+$\sigma(\Sigma_0)=\mathcal{B}(0,1]$であることを示せ．
+\end{qst}
+
+%\begin{proof}
+%$(a_1,b_1]=\displaystyle\bigcap_{n=1}^\infty(a_1,b_1+n^{-1})
+%=(0,1]\cap\bigcap_{n=1}^\infty(a_1,b_1+n^{-1})
+%=\bigcap_{n=1}^\infty[(0,1]\cap(a_1,b_1+n^{-1})]$
+%より$\Sigma_0\subseteq\mathcal{B}(0,1]$すなわち$\sigma(\Sigma_0)\subseteq\mathcal{B}(0,1]$．
+%$\mathbb{R}$の開集合$O$に対し$(0,1] \cap O\in\sigma(\Sigma_0)$であることを示す．
+%問\ref{qst_real_open_set_is_countable_union_of_open_interval}より
+%$O=\displaystyle\bigcup_{n=1}^\infty(a_n,b_n)$であるから
+%$(0,1] \cap O=(0,1] \cap\displaystyle\bigcup_{n=1}^\infty(a_n,b_n)$
+%\end{proof}
+
+$F=(a_1,b_1]\cup\cdots\cup(a_r,b_r]\in\Sigma_0$に対して
+\[ \mu_0(F)=\sum_{k=1}^r(b_k-a_k) \]
+と定める．
+
+\begin{qst}\label{qst_check_that_mu_0_is_well-defined_and_additive}
+$\mu_0$はwell-definedかつ有限加法的であることを示せ．
+\end{qst}
+
+実は，次の事実が成り立つ．
+証明は少し長くなるので，ここでは省略する．
+
+\begin{lem}\label{lem_mu_0_is_countably_additive}
+$\mu_0$は$\sigma$-加法的である．
+\end{lem}
+
+ここで，ルベーグ測度の構成において最も重要な定理を述べる．
+
+\begin{thm}[\textbf{カラテオドリの拡張定理}]\label{Caratheodorys_extension_theorem}
+集合$S$と$S$上の有限加法族$\Sigma_0$に対し，$\Sigma:=\sigma(\Sigma_0)$とおく．
+このとき，$\mu_0\colon\Sigma_0\to[0,\infty]$が可算加法的ならば，
+可測空間$(S,\Sigma)$上の測度$\mu$で$\Sigma_0$上$\mu=\mu_0$となるものが存在する．
+\end{thm}
+
 % \chapter{ルベーグ可測空間}
 % \chapter{可測関数}
 % \chapter{積分}
+
+% \part{問の答え}
 
 % 参考文献
 \begin{thebibliography}{9}
